@@ -25,7 +25,7 @@ This project is a web scraping application built using Scrapy to crawl and extra
     ```sh
     source venv/bin/activate
     ```
-    
+
 
 3. **Install the required dependencies:**
 
@@ -45,12 +45,15 @@ python generate_spiders.py
 
 This will create spider files in the spiders_automation/spiders directory using the Mako template located at templates/spiders/quote_template.mako.
 
+Move the spiders to quote_crawl/quote_crawl/spiders directory.
+
 ## Running Spiders
 To run a specific spider, use the scrapy crawl command followed by the spider's name. For example:
 
 ```
 cd quote_crawl
 scrapy crawl QuotationsPage
+scrapy crawl AzQuotes
 ```
 
 ## Configuration

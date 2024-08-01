@@ -1,6 +1,8 @@
 
 
 import scrapy
+from quote_crawl.items import QuoteCrawlItem
+from quote_crawl.items_loader import QuoteLoader
 
 class BrainyquoteSpider(scrapy.Spider):
     name = "BrainyQuote"
@@ -11,7 +13,7 @@ class BrainyquoteSpider(scrapy.Spider):
 
     def parse(self, response):
         for quote in response.css('div.grid-item.qb.clearfix.bqQt'):
-            yield {
-                'title': quote.css('div').get(),
-                'author': quote.css('a.bq-aut.qa_109542.oncl_a').get(),
-            }
+            loader = QuoteLoader(item=QuoteCrawlItem(), selector=quote)
+            loader.add_css("title", "div::text")
+            loader.add_css("author", "a.bq-aut.qa_109542.oncl_a::text")
+            yield loader.load_item()

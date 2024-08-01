@@ -1,6 +1,8 @@
 
 
 import scrapy
+from quote_crawl.items import QuoteCrawlItem
+from quote_crawl.items_loader import QuoteLoader
 
 class AzquotesSpider(scrapy.Spider):
     name = "AzQuotes"
@@ -11,7 +13,7 @@ class AzquotesSpider(scrapy.Spider):
 
     def parse(self, response):
         for quote in response.css('div.wrap-block'):
-            yield {
-                'title': quote.css('p a.title').get(),
-                'author': quote.css('div.author a').get(),
-            }
+            loader = QuoteLoader(item=QuoteCrawlItem(), selector=quote)
+            loader.add_css("title", "p a.title::text")
+            loader.add_css("author", "div.author a::text")
+            yield loader.load_item()

@@ -4,7 +4,7 @@
     "start_urls": ["http://www.quotationspage.com/qotd.html"],
     "quote_div_main": "dl",
     "title_selector": "dt.quote a",
-    "author_selector": "dd.author a"
+    "author_selector": "dd.author b a"
   },
 
   {

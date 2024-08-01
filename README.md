@@ -15,10 +15,17 @@ This project is a web scraping application built using Scrapy to crawl and extra
     ```
 
 2. **Create and activate a virtual environment:**
+    Create a venv environment using the following command:
 
     ```sh
-    source activate_venv.sh
+    python -m venv venv
     ```
+    Activate the virtual environment using the following command:
+
+    ```sh
+    source venv/bin/activate
+    ```
+    
 
 3. **Install the required dependencies:**
 

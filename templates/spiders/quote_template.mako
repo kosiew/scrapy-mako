@@ -22,8 +22,11 @@ class ${spiderclass}(scrapy.Spider):
             yield scrapy.Request(url, headers=headers)
 
     def parse(self, response):
-        for quote in response.css('${quote_div_main}'):
-            loader = QuoteLoader(item=QuoteCrawlItem(), selector=quote)
-            loader.add_css("title", "${title_selector}::text")
-            loader.add_css("author", "${author_selector}::text")
-            yield loader.load_item()
+        for main in response.css('${quote_div_main}'):
+            quotes = main.css('${title_selector}::text').getall()
+            authors = main.css('${author_selector}::text').getall()
+            for quote, author in zip(quotes, authors):
+                loader = QuoteLoader(item=QuoteCrawlItem())
+                loader.add_value("title", quote)
+                loader.add_value("author", author)
+                yield loader.load_item()
